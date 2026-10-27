@@ -1,0 +1,55 @@
+﻿@page "/"
+
+<PageTitle>Hệ Thống Quản Lý Tài Sản</PageTitle>
+
+<RadzenCard class="rz-my-4">
+    <h3 class="text-primary fw-bold">HỆ THỐNG QUẢN LÝ & THEO DÕI TÀI SẢN</h3>
+    <p class="text-muted mb-0">Theo dõi trang thiết bị, phương tiện và tài sản đơn vị theo thời gian thực.</p>
+</RadzenCard>
+
+<div class="row g-3">
+    <div class="col-md-3">
+        <RadzenCard Style="border-left: 5px solid var(--rz-primary);">
+            <div class="d-flex align-items-center gap-3">
+                <RadzenIcon Icon="inventory_2" Style="font-size: 2.5rem; color: var(--rz-primary);" />
+                <div>
+                    <div class="text-muted">Tổng số tài sản</div>
+                    <h3 class="mb-0 fw-bold">128</h3>
+                </div>
+            </div>
+        </RadzenCard>
+    </div>
+    <div class="col-md-3">
+        <RadzenCard Style="border-left: 5px solid var(--rz-success);">
+            <div class="d-flex align-items-center gap-3">
+                <RadzenIcon Icon="check_circle" Style="font-size: 2.5rem; color: var(--rz-success);" />
+                <div>
+                    <div class="text-muted">Đang sử dụng</div>
+                    <h3 class="mb-0 fw-bold">95</h3>
+                </div>
+            </div>
+        </RadzenCard>
+    </div>
+    <div class="col-md-3">
+        <RadzenCard Style="border-left: 5px solid var(--rz-warning);">
+            <div class="d-flex align-items-center gap-3">
+                <RadzenIcon Icon="assignment_returned" Style="font-size: 2.5rem; color: var(--rz-warning);" />
+                <div>
+                    <div class="text-muted">Cần thu hồi</div>
+                    <h3 class="mb-0 fw-bold">12</h3>
+                </div>
+            </div>
+        </RadzenCard>
+    </div>
+    <div class="col-md-3">
+        <RadzenCard Style="border-left: 5px solid var(--rz-danger);">
+            <div class="d-flex align-items-center gap-3">
+                <RadzenIcon Icon="build" Style="font-size: 2.5rem; color: var(--rz-danger);" />
+                <div>
+                    <div class="text-muted">Hỏng / Thanh lý</div>
+                    <h3 class="mb-0 fw-bold">21</h3>
+                </div>
+            </div>
+        </RadzenCard>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+﻿@inherits LayoutComponentBase
+
+<RadzenLayout Style="grid-template-areas: 'rz-sidebar rz-header' 'rz-sidebar rz-body';">
+    <!-- THANH HEADER TRÊN CÙNG -->
+    <RadzenHeader>
+        <div class="d-flex align-items-center justify-content-between px-3" style="height: 100%;">
+            <div class="d-flex align-items-center gap-3">
+                <RadzenSidebarToggle />
+                <RadzenLabel Text="HỆ THỐNG QUẢN LÝ ĐÀO TẠO" Style="font-weight: bold; font-size: 1.1rem;" />
+            </div>
+            <div>
+                <RadzenBadge BadgeStyle="BadgeStyle.Success" Text="Trực ban / Đang hoạt động" />
+            </div>
+        </div>
+    </RadzenHeader>
+
+    <!-- THANH MENU BÊN TRÁI -->
+    <RadzenSidebar>
+        <NavMenu />
+    </RadzenSidebar>
+
+    <!-- KHU VỰC HIỂN THỊ NỘI DUNG CHÍNH -->
+    <RadzenBody>
+        <div class="rz-p-4">
+            @Body
+        </div>
+    </RadzenBody>
+</RadzenLayout>

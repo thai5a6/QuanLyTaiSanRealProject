@@ -1,0 +1,72 @@
+﻿@page "/danh-sach-tai-san"
+@rendermode InteractiveServer
+
+<PageTitle>Danh Mục Tài Sản</PageTitle>
+
+<h3 class="fw-bold text-primary mb-3">Danh Mục Quản Lý Tài Sản & Thiết Bị</h3>
+
+<div class="d-flex justify-content-between mb-3">
+    <RadzenButton Text="Thêm tài sản mới" Icon="add_circle" ButtonStyle="ButtonStyle.Success" Click="@ThemTaiSan" />
+    <RadzenTextBox Placeholder="Tìm kiếm mã hoặc tên tài sản..." Style="width: 300px;" @bind-Value="tuKhoa" />
+</div>
+
+<RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced"
+                AllowSorting="true" PageSize="5" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left"
+                Data="@DanhSachLoc" TItem="TaiSan" ColumnWidth="200px">
+    <Columns>
+        <RadzenDataGridColumn Property="MaTaiSan" Title="Mã tài sản" Width="130px" />
+        <RadzenDataGridColumn Property="TenTaiSan" Title="Tên tài sản / Thiết bị" Width="220px" />
+        <RadzenDataGridColumn Property="LoaiTaiSan" Title="Chủng loại" Width="150px" />
+        <RadzenDataGridColumn Property="NguoiQuanLy" Title="Người / Đơn vị nắm giữ" Width="180px" />
+        <RadzenDataGridColumn Property="NgayCapPhat" Title="Ngày cấp" FormatString="{0:dd/MM/yyyy}" Width="130px" />
+        <RadzenDataGridColumn Property="TinhTrang" Title="Trạng thái" Width="150px">
+            <Template Context="ts">
+                @if (ts.TinhTrang == "Đang sử dụng")
+                {
+                    <RadzenBadge BadgeStyle="BadgeStyle.Success" Text="@ts.TinhTrang" />
+                }
+                else if (ts.TinhTrang == "Cần thu hồi")
+                {
+                    <RadzenBadge BadgeStyle="BadgeStyle.Warning" Text="@ts.TinhTrang" />
+                }
+                else
+                {
+                    <RadzenBadge BadgeStyle="BadgeStyle.Danger" Text="@ts.TinhTrang" />
+                }
+            </Template>
+        </RadzenDataGridColumn>
+    </Columns>
+</RadzenDataGrid>
+
+@code {
+    private string tuKhoa = "";
+
+    private List<TaiSan> danhSach = new()
+    {
+        new TaiSan { MaTaiSan = "TS-001", TenTaiSan = "Laptop Lenovo Legion", LoaiTaiSan = "Thiết bị CNTT", NguoiQuanLy = "Nguyễn Anh Tuấn", NgayCapPhat = DateTime.Now.AddMonths(-6), TinhTrang = "Đang sử dụng" },
+        new TaiSan { MaTaiSan = "TS-002", TenTaiSan = "Màn hình LG 27 inch", LoaiTaiSan = "Thiết bị CNTT", NguoiQuanLy = "Phòng Trực ban", NgayCapPhat = DateTime.Now.AddMonths(-3), TinhTrang = "Đang sử dụng" },
+        new TaiSan { MaTaiSan = "TS-003", TenTaiSan = "Bộ đàm Motorola P6620i", LoaiTaiSan = "Thông tin liên lạc", NguoiQuanLy = "Tổ tuần tra số 1", NgayCapPhat = DateTime.Now.AddYears(-1), TinhTrang = "Cần thu hồi" },
+        new TaiSan { MaTaiSan = "TS-004", TenTaiSan = "Xe máy Honda Wave Alpha", LoaiTaiSan = "Phương tiện", NguoiQuanLy = "Đội cơ động", NgayCapPhat = DateTime.Now.AddYears(-2), TinhTrang = "Hỏng / Bảo dưỡng" }
+    };
+
+    private IEnumerable<TaiSan> DanhSachLoc =>
+        string.IsNullOrWhiteSpace(tuKhoa)
+            ? danhSach
+            : danhSach.Where(x => x.TenTaiSan.Contains(tuKhoa, StringComparison.OrdinalIgnoreCase) ||
+                                  x.MaTaiSan.Contains(tuKhoa, StringComparison.OrdinalIgnoreCase));
+
+    private void ThemTaiSan()
+    {
+        // Có thể mở popup nhập thông tin tài sản mới tại đây
+    }
+
+    public class TaiSan
+    {
+        public string MaTaiSan { get; set; } = "";
+        public string TenTaiSan { get; set; } = "";
+        public string LoaiTaiSan { get; set; } = "";
+        public string NguoiQuanLy { get; set; } = "";
+        public DateTime NgayCapPhat { get; set; }
+        public string TinhTrang { get; set; } = "";
+    }
+}
